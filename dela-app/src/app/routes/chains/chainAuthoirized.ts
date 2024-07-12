@@ -1,19 +1,13 @@
-import {
-  RouteInstance,
-  RouteParams,
-  RouteParamsAndQuery,
-  chainRoute,
-  redirect,
-} from "atomic-router";
-import { createEvent, sample } from "effector";
-import { $isAuth } from "../../model";
-import { and, not, or } from "patronum";
-import { routes } from "../router";
-import { $userData } from "@src/entities/user/api/query";
+import { userQuery } from '@src/entities/user/api/query';
 
-export function chainAuthorized<Params extends RouteParams>(
-  route: RouteInstance<Params>
-) {
+import { chainRoute, redirect, RouteInstance, RouteParams, RouteParamsAndQuery } from 'atomic-router';
+import { createEvent, sample } from 'effector';
+import { not, or } from 'patronum';
+
+import { $isAuth } from '../../model';
+import { routes } from '../router';
+
+export function chainAuthorized<Params extends RouteParams>(route: RouteInstance<Params>) {
   const checkSessionStarted = createEvent<RouteParamsAndQuery<Params>>();
 
   const isAuthorized = sample({
@@ -33,8 +27,8 @@ export function chainAuthorized<Params extends RouteParams>(
 
   sample({
     clock: checkSessionStarted,
-    filter: or($isAuth, $userData.$succeeded),
-    target: $userData.start,
+    filter: not(userQuery.$succeeded),
+    target: userQuery.start,
   });
 
   return chainRoute({

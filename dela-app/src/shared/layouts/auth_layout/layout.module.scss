@@ -1,0 +1,6 @@
+@import '@src/app/styles/mixins.scss';
+
+.layout {
+    @include flex-center-center;
+    @include layout-fullscreen;
+}

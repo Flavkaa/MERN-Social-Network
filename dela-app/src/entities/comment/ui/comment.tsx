@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import cs from "./comment.module.scss";
-import { Direction } from "@src/shared/interfaces/ui/Flex.interfaces";
-import { Container } from "@src/shared/ui/container";
-import { Flex } from "@src/shared/ui/flex";
-import { Avatar } from "@src/widgets/avatar/avatar";
-import { Paragraph } from "@src/shared/ui/paragraph/paragraph";
-import { formatDateTime } from "@src/shared/helpers/formatDate";
+import { formatDateTime } from '@src/shared/helpers/formatDate';
+import { Direction } from '@src/shared/interfaces/ui/Flex.interfaces';
+import { Container } from '@src/shared/ui/container';
+import { Flex } from '@src/shared/ui/flex';
+import { Paragraph } from '@src/shared/ui/paragraph/paragraph';
+import { Avatar } from '@src/widgets/avatar/avatar';
+
+import cs from './comment.module.scss';
 
 type Props = {
   firstName: string;
@@ -18,11 +19,8 @@ type Props = {
 export const Comment = ({ firstName, lastName, text, createdAt }: Props) => {
   return (
     <Container className={cs.container}>
-      <Flex direction={Direction.Column} className={cs.author}>
-        <Avatar
-          firstName={firstName || ""}
-          lastName={lastName || firstName ? firstName[1] : ""}
-        />
+      <Flex className={cs.author} direction={Direction.Column}>
+        <Avatar firstName={firstName || ''} lastName={lastName || firstName ? firstName[1] : ''} />
         <Flex direction={Direction.Column}>
           <Paragraph>
             {firstName} {lastName}

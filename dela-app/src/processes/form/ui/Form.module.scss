@@ -1,11 +1,14 @@
 .container {
-    width: 550px;
-    padding: 32px;
-    height: min-content;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #303030;
-    background-color: #181818;
-    border-radius: 14px;
-    gap: 24px;
+    form {
+        width: 550px;
+        padding: 32px;
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.flex_mod {
+    gap: 12px;
 }

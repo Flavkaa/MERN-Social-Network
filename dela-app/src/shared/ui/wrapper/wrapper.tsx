@@ -1,6 +1,6 @@
-import cn from "classnames";
+import cn from 'classnames';
 
-import cs from "./wrapper.module.scss";
+import cs from './wrapper.module.scss';
 
 export const Wrapper = ({
   children,

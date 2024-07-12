@@ -1,4 +1,6 @@
-.button {
+@import '@src/app/styles/globals.scss';
+
+.primary {
     width: 100%;
     height: 56px;
     padding: 16px 32px 16px 32px;
@@ -12,8 +14,35 @@
     font-weight: 500;
     font-size: 16px;
     transition: all 0.2s ease;
+    min-width: 360px;
 }
 
-.button:hover {
-    background-color: rgb(89, 89, 187);
+.link {
+    width: 100%;
+    padding: 16px 32px 16px 32px;
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    color: var(--main-link);
+    transition: all 0.2s ease;
+    min-width: 360px;
+}
+
+.link:hover {
+    cursor: pointer;
+    color: var(--main-link-hover);
+}
+
+.primary:hover {
+    background-color: rgb(74, 74, 156);
+}
+
+.primary:disabled {
+    cursor: not-allowed;
+    background-color: rgb(150, 150, 150);
+    color: rgb(200, 200, 200);
+    color: black;
+    opacity: 0.6;
 }

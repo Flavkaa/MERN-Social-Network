@@ -9,7 +9,7 @@ export interface InputProps
 }
 
 export enum InputVariant {
-  Disabled = "disabled",
-  Loading = "loading",
-  Error = "error",
+  Disabled = 'disabled',
+  Loading = 'loading',
+  Error = 'error',
 }

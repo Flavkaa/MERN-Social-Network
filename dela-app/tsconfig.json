@@ -26,5 +26,6 @@
     }
   },
   "include": ["src"],
+  "exclude": ["./vite.config.ts", "./.prettierrc.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

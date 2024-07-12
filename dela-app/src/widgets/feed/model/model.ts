@@ -1,25 +1,16 @@
-import { cache, createCacheAdapter, createQuery } from "@farfetched/core";
-import { router, routes } from "@src/app/routes";
-import { commentPost } from "@src/entities/post/model/model";
-import { currentRoute } from "@src/pages/feed";
-import { api } from "@src/shared/api";
-import { IPost } from "@src/shared/interfaces/entities/Post.interface";
-import { chainRoute } from "atomic-router";
-import {
-  combine,
-  createEffect,
-  createEvent,
-  createStore,
-  sample,
-} from "effector";
-import { debounce } from "patronum";
+import { routes } from '@src/app/routes';
+import { toLikeOrDislikePost } from '@src/processes/actions_post';
+import { commentPost } from '@src/processes/comment_post/model/model';
+import { createPost } from '@src/processes/create_post/model/model';
+import { api } from '@src/shared/api';
+import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 
-// /* READ */
-// router.get("/feed", verifyToken, getFeedPosts);
-// router.get("/:userId/posts", getUserPosts);
+import { cache, createQuery, update } from '@farfetched/core';
+import { combine, createEffect, createEvent, createStore, sample } from 'effector';
+import { debounce } from 'patronum';
 
 const $page = createStore(0);
-const $search = createStore("");
+const $search = createStore('');
 
 export const $filters = combine($page, $search, (page, search) => {
   return {
@@ -30,7 +21,7 @@ export const $filters = combine($page, $search, (page, search) => {
 
 export const feedQuery = createQuery({
   handler: async () => {
-    const response = await api.get<IPost[]>("/posts/feed");
+    const response = await api.get<IPost[]>('/posts/feed');
 
     return response.data;
   },
@@ -42,13 +33,67 @@ const getFeedFx = createEffect(feedQuery.start);
 
 debounce({
   source: $filters,
-  target: getFeedFx,
+  target: feedQuery.start,
   timeout: 300,
 });
 
-chainRoute({
-  route: routes.private.feed,
-  beforeOpen: getFeedFx,
+cache(feedQuery);
+
+update(feedQuery, {
+  on: commentPost,
+  by: {
+    success({ mutation, query }) {
+      if (query && query !== null && 'result' in query) {
+        const queryResult = query;
+        queryResult.result = queryResult.result.map((post) => {
+          if (post._id === mutation.result._id) {
+            return mutation.result;
+          } else {
+            return post;
+          }
+        });
+        return queryResult;
+      }
+      return { result: [mutation.result] };
+    },
+  },
+});
+
+update(feedQuery, {
+  on: toLikeOrDislikePost,
+  by: {
+    success({ mutation, query }) {
+      if (query && query !== null && 'result' in query) {
+        const queryResult = query;
+        queryResult.result = queryResult.result.map((post) => {
+          if (post._id === mutation.result._id) {
+            return mutation.result;
+          } else {
+            return post;
+          }
+        });
+        return queryResult;
+      }
+      return { result: [mutation.result] };
+    },
+  },
+});
+
+update(feedQuery, {
+  on: createPost,
+  by: {
+    //@ts-ignore
+    success({ mutation, query }) {
+      if (query && query !== null && 'result' in query) {
+        return { result: [mutation.result, ...query.result] };
+      }
+    },
+  },
+});
+
+sample({
+  clock: routes.private.feed.opened,
+  target: getFeedFx,
 });
 
 export { updateSinglePost };

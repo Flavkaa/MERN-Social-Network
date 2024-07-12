@@ -1,26 +1,63 @@
-import { $isAuth, $token, tokenRecieved } from "@src/app/model";
-import { createEvent, createStore, sample } from "effector";
-import { not, or } from "patronum";
-import { auth } from "./api";
-import { redirect } from "atomic-router";
-import { routes } from "@src/app/routes";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { $token, tokenRecieved } from '@src/app/model';
+import { routes } from '@src/app/routes';
+import { IUser } from '@src/shared/interfaces/entities/User.interface';
 
-const $email = createStore<string>("");
-const $password = createStore<string>("");
+import { redirect } from 'atomic-router';
+import { createEvent, createStore, sample } from 'effector';
+import { or } from 'patronum';
+
+import { auth, register } from './api';
+
+const $email = createStore<string>('');
+const $password = createStore<string>('');
+
+const $firstName = createStore<string>('');
+const $lastName = createStore<string>('');
+
+const $friends = createStore<any[]>([]);
+
+const $authMode = createStore<'login' | 'registration'>('login');
 
 const emailChanged = createEvent<string>();
 const passwordChanged = createEvent<string>();
+
+const firstNameChanged = createEvent<string>();
+const lastNameChanged = createEvent<string>();
+
+const changeAuthMode = createEvent<'login' | 'registration'>();
 const formSubmitted = createEvent();
 
 $email.on(emailChanged, (_, value) => value);
 $password.on(passwordChanged, (_, value) => value);
+$firstName.on(firstNameChanged, (_, value) => value);
+$lastName.on(lastNameChanged, (_, value) => value);
+
+$email.on(changeAuthMode, (_, value) => '');
+$password.on(changeAuthMode, (_, value) => '');
+
+$authMode.on(changeAuthMode, (_, value) => value);
 
 const $formDisabled = or(auth.$pending);
 
 sample({
   clock: formSubmitted,
+  filter: () => $authMode.getState() === 'login',
   source: { email: $email, password: $password },
   target: auth.start,
+});
+
+sample({
+  clock: formSubmitted,
+  filter: () => $authMode.getState() === 'registration',
+  source: { firstName: $firstName, lastName: $lastName, email: $email, password: $password, friends: $friends },
+  target: register.start,
+});
+
+sample({
+  clock: register.finished.success,
+  fn: (clk) => clk.result.data.token,
+  target: tokenRecieved,
 });
 
 sample({
@@ -29,21 +66,27 @@ sample({
   target: tokenRecieved,
 });
 
-const isAuthorized = sample({
-  clock: $token,
-  filter: not($isAuth),
+redirect({
+  clock: auth.$succeeded,
+  route: routes.private.feed,
 });
 
 redirect({
-  clock: isAuthorized,
+  clock: register.$succeeded,
   route: routes.private.feed,
 });
 
 export {
   $email,
   $password,
+  firstNameChanged,
+  lastNameChanged,
+  $lastName,
+  $firstName,
   $formDisabled,
   emailChanged,
+  $authMode,
+  changeAuthMode,
   formSubmitted,
   passwordChanged,
 };

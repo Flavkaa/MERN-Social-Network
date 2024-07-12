@@ -1,1 +1,1 @@
-export { mappedRoutes, router, routes } from './router'
+export { mappedRoutes, router, routes } from './router';

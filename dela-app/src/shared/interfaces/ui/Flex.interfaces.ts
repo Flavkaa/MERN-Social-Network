@@ -8,6 +8,13 @@ export enum Align {
   Baseline = 'baseline',
 }
 
+export enum Justify {
+  Start = 'flex-start',
+  Center = 'center',
+  End = 'flex-end',
+  SpaceBetween = 'space-between',
+}
+
 export enum Direction {
   Row = 'row',
   Column = 'column',
@@ -15,6 +22,7 @@ export enum Direction {
 
 export interface Props {
   align?: Align;
+  justify?: Justify;
   direction?: Direction;
   className?: string;
   style?: React.CSSProperties;

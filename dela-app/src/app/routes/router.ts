@@ -1,7 +1,8 @@
-import { createHistoryRouter, createRoute } from "atomic-router";
-import { sample } from "effector";
-import { createBrowserHistory } from "history";
-import { initializeApp } from "../model";
+import { createHistoryRouter, createRoute } from 'atomic-router';
+import { sample } from 'effector';
+import { createBrowserHistory } from 'history';
+
+import { initializeApp } from '../model';
 
 export const routes = {
   home: createRoute(),
@@ -11,25 +12,30 @@ export const routes = {
   },
   private: {
     feed: createRoute(),
+    user: createRoute<{ userId: string }>(),
   },
 };
 
 export const mappedRoutes = [
   {
     route: routes.home,
-    path: "/",
+    path: '/',
   },
   {
     route: routes.auth.auth,
-    path: "/auth",
+    path: '/auth',
   },
   {
     route: routes.auth.registration,
-    path: "/registration",
+    path: '/registration',
   },
   {
     route: routes.private.feed,
-    path: "/feed",
+    path: '/feed',
+  },
+  {
+    route: routes.private.user,
+    path: '/user/:userId',
   },
 ];
 

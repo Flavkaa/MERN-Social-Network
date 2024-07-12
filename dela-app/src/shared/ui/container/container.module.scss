@@ -1,8 +1,18 @@
+@import '@src/app/styles/globals.scss';
+
 .container {
     width: 100%;
     background-color: #181818;
     border: 1px solid #303030;
     border-radius: 12px;
+}
+
+.isLoading {
+    background-color: var(--main-skeleton);
+}
+
+.sm {
+    padding: 12px;
 }
 
 .null {
@@ -12,6 +22,11 @@
 
 .all {
     border-radius: 12px;
+    border: 1px solid #303030;
+}
+
+.no_radius {
+    border-radius: 0px;
     border: 1px solid #303030;
 }
 

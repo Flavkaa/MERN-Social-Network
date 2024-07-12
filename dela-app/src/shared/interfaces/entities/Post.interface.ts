@@ -6,10 +6,12 @@ export interface IPost {
   location?: string;
   createdAt?: string;
   description?: string;
-  likes: Map<string, boolean>;
+  likes: LikesMap;
   comments: Comment[];
 }
-
+interface LikesMap {
+  [id: string]: boolean;
+}
 export interface Comment {
   firstName: string;
   lastName: string;

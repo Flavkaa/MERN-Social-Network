@@ -1,6 +1,5 @@
 {
   "extends": [
-    "react-app",
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -13,7 +12,8 @@
       "jsx": true
     },
     "ecmaVersion": 9,
-    "sourceType": "module" 
+    "project": "tsconfig.json",
+    "sourceType": "module"
   },
   "env": {
     "browser": true,
@@ -22,7 +22,6 @@
   "plugins": [
     "eslint-plugin-import-helpers",
     "jsx-a11y",
-    "prettier",
     "react",
     "react-hooks"
   ],
@@ -33,11 +32,9 @@
   },
   "rules": {
     "no-underscore-dangle": "off",
-    "prettier/prettier": "error",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-
     "@typescript-eslint/no-empty-interface": [
       "error",
       {
@@ -64,7 +61,14 @@
           "ignoreCase": true,
           "order": "asc"
         },
-        "groups": ["/^react/", "module", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^react/",
+          "/^@src/",
+          "/^@shared/",
+          "module",
+          ["parent", "sibling", "index"]
+        ],
+
         "newlinesBetween": "always"
       }
     ],
@@ -117,5 +121,6 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "react/require-default-props": "off"
-  }
+  },
+  "ignorePatterns": ["vite.config.ts"]
 }

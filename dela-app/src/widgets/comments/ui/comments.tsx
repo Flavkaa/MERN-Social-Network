@@ -1,9 +1,7 @@
-import React from "react";
+import { Comment } from '@src/entities/comment/ui/comment';
+import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 
-import { IPost } from "@src/shared/interfaces/entities/Post.interface";
-import { Comment } from "@src/entities/comment/ui/comment";
-
-export const Comments = ({ comments }: Pick<IPost, "comments">) => {
+export const Comments = ({ comments }: Pick<IPost, 'comments'>) => {
   return (
     <>
       {comments?.map((item) => {

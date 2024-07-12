@@ -1,19 +1,30 @@
-/* eslint-disable react/no-children-prop */
-import React, { FormEventHandler } from "react";
+import React, { FormEventHandler } from 'react';
 
-import { useUnit } from "effector-react";
+import { Direction } from '@src/shared/interfaces/ui/Flex.interfaces';
+import { Button } from '@src/shared/ui/button';
+import { Container } from '@src/shared/ui/container';
+import { Flex } from '@src/shared/ui/flex';
+import { Input } from '@src/shared/ui/input';
+
+import { useUnit } from 'effector-react';
 
 import {
+  $authMode,
   $email,
+  $firstName,
   $formDisabled,
+  $lastName,
   $password,
+  changeAuthMode,
   emailChanged,
+  firstNameChanged,
   formSubmitted,
+  lastNameChanged,
   passwordChanged,
-} from "../model/model";
-import cs from "./Form.module.scss";
-import { Input } from "@src/shared/ui/input";
-import { Button } from "@src/shared/ui/button";
+} from '../model/model';
+import cs from './Form.module.scss';
+import { LoginMode } from './LoginMode';
+import { RegistrationMode } from './RegistrationMode';
 
 export interface IAuthForm {
   email: string;
@@ -21,11 +32,15 @@ export interface IAuthForm {
 }
 
 export const Form = () => {
-  const [email, password, submitForm, disabled] = useUnit([
+  const [email, password, firstName, lastName, submitForm, disabled, authMode, changeMode] = useUnit([
     $email,
     $password,
+    $firstName,
+    $lastName,
     formSubmitted,
     $formDisabled,
+    $authMode,
+    changeAuthMode,
   ]);
 
   const onFormSubmit: FormEventHandler = (e) => {
@@ -33,39 +48,66 @@ export const Form = () => {
     submitForm();
   };
 
-  const onEmailChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      emailChanged(e.target.value);
-    },
-    []
-  );
+  const onFirstNameChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    firstNameChanged(e.target.value);
+  }, []);
 
-  const onPasswordChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      passwordChanged(e.target.value);
-    },
-    []
-  );
+  const onLastNameChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    lastNameChanged(e.target.value);
+  }, []);
 
-  console.log(email, password);
+  const onEmailChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    emailChanged(e.target.value);
+  }, []);
+
+  const onPasswordChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    passwordChanged(e.target.value);
+  }, []);
+
+  console.log(firstName, lastName);
+
   return (
-    <form className={cs.container} onSubmit={onFormSubmit}>
-      <Input
-        children={"Почта"}
-        id="email"
-        onChange={onEmailChange}
-        type="email"
-        // disabled={disabled}
-        value={email}
-      />
-      <Input
-        children={"Пароль"}
-        id="password"
-        onChange={onPasswordChange}
-        // disabled={disabled}
-        value={password}
-      />
-      <Button children={"Войти"} disabled={disabled} type="submit" />
-    </form>
+    <Container className={cs.container}>
+      <form onSubmit={onFormSubmit}>
+        {authMode === 'login' && (
+          <LoginMode
+            email={email || ''}
+            onEmailChange={onEmailChange}
+            onPasswordChange={onPasswordChange}
+            password={password}
+          />
+        )}
+        {authMode === 'registration' && (
+          <RegistrationMode
+            disabled={disabled}
+            email={email || ''}
+            firstName={firstName}
+            lastName={lastName}
+            onEmailChange={onEmailChange}
+            onFirstNameChange={onFirstNameChange}
+            onLastNameChange={onLastNameChange}
+            onPasswordChange={onPasswordChange}
+            password={password}
+          />
+        )}
+        <Button
+          children={authMode === 'login' ? 'Войти' : 'Зарегестрироваться'}
+          disabled={disabled}
+          loading={false}
+          type="submit"
+          variant={'primary'}
+        />
+        <Button
+          children={authMode === 'login' ? 'Нет аккаунта? Зарегестрироваться' : 'Есть аккаунт? Войти'}
+          disabled={disabled}
+          loading={false}
+          onClick={() => {
+            changeMode(authMode === 'login' ? 'registration' : 'login');
+          }}
+          type="button"
+          variant={'link'}
+        />
+      </form>
+    </Container>
   );
 };

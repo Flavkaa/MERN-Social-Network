@@ -1,8 +1,8 @@
-import { createEvent, createStore } from "effector";
-import { persist } from "effector-storage/local";
-import { and } from "patronum";
+import { createEvent, createStore } from 'effector';
+import { persist } from 'effector-storage/local';
+import { and } from 'patronum';
 
-const $token = createStore("");
+const $token = createStore('');
 
 const tokenRecieved = createEvent();
 const tokenExpired = createEvent();
@@ -14,7 +14,7 @@ const $isAuth = and($token);
 
 persist({
   store: $token,
-  key: "token",
+  key: 'token',
   serialize: (v) => v,
   deserialize: (v) => v,
 });
