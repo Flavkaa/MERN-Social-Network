@@ -1,17 +1,17 @@
 import { api } from '@src/shared/api';
-import { IUser } from '@src/shared/interfaces/entities/User.interface';
+import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 
 import { createMutation } from '@farfetched/core';
 import { createEvent, sample } from 'effector';
 
 type PostMutationType = {
   userId: string;
-  descirption: string;
+  description: string;
 };
 
 export const createPost = createMutation({
   handler: async (post: PostMutationType) => {
-    const response = await api.post<PostMutationType>('posts', post);
+    const response = await api.post<IPost>('posts', post);
     return response.data;
   },
 });

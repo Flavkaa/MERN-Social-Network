@@ -1,13 +1,7 @@
-import { routes } from '@src/app/routes';
-import { chainAuthorized } from '@src/app/routes/chains/chainAuthoirized';
-import { userQuery } from '@src/entities/user/api/query';
 import { api } from '@src/shared/api';
 import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 
 import { createQuery } from '@farfetched/core';
-import { chainRoute } from 'atomic-router';
-import { sample } from 'effector';
-import { and } from 'patronum';
 
 export const userFeed = createQuery({
   handler: async (userId: string) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { userQuery } from '@src/entities/user/api/query';
-import { IUser } from '@src/shared/interfaces/entities/User.interface';
+import { useKeyDown } from '@src/shared/hooks/useKeyDown';
 import { Container } from '@src/shared/ui/container';
 import { Input } from '@src/shared/ui/input';
 import { Avatar } from '@src/widgets/avatar/avatar';
@@ -21,6 +21,13 @@ export const CreatePost = () => {
     setValue(e.target.value);
   }, []);
 
+  const handleSend = () => {
+    send({ userId: user?._id as string, description: value });
+    setValue('');
+  };
+
+  useKeyDown({ cb: handleSend, key: 'Enter' });
+
   return (
     <Container className={cs.container}>
       <Avatar firstName={user?.firstName || ''} lastName={user?.lastName || ''} />
@@ -28,14 +35,7 @@ export const CreatePost = () => {
         icon={<IconSend2 />}
         id={'post-input'}
         onChange={handleChange}
-        onIconClick={() => {
-          send({ userId: user?._id as string, descirption: value });
-          setValue('');
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') send({ userId: user?._id as string, descirption: value });
-          setValue('');
-        }}
+        onIconClick={() => {}}
         placeholder="Как прошёл ваш день?"
         value={value}
       />

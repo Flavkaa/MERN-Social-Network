@@ -1,4 +1,5 @@
-import { useScrollVisibility } from '@src/shared/helpers/hooks/useScrollVisibility';
+import { useScrollVisibility } from '@src/shared/hooks/useScrollVisibility';
+import AnimatedContainer from '@src/widgets/animated-container/animated-container';
 
 import { motion } from 'framer-motion';
 
@@ -10,6 +11,9 @@ export function Header() {
   return (
     <motion.header animate={controls} className={styles.header_container}>
       Дела
+      {/* <div>
+        <AnimatedContainer />
+      </div> */}
     </motion.header>
   );
 }

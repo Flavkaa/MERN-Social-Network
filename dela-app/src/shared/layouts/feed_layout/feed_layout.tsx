@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useScrollVisibility } from '@src/shared/helpers/hooks/useScrollVisibility';
+import { useScrollVisibility } from '@src/shared/hooks/useScrollVisibility';
 import { Header } from '@src/shared/ui/header';
 
 import { motion } from 'framer-motion';

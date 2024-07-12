@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Comment } from '@src/entities/comment/ui/comment';
 import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 

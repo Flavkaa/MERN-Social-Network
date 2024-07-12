@@ -1,0 +1,57 @@
+.button {
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+}
+
+.button-enter-active {
+    width: 100px;
+    transition: width 0.3s ease;
+}
+
+.button-enter-done {
+    width: 100px;
+    transition: width 0.3s ease;
+}
+
+.button-exit {
+    width: 100px;
+}
+
+.button-exit-active {
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.button-exit-done {
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-enter-active {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+    transition: opacity 500ms;
+}

@@ -19,8 +19,7 @@ export const createPost = async (req, res) => {
     });
     await newPost.save();
 
-    const posts = await Post.find().sort({ _id: -1 }); // Запрос постов в обратном порядке
-    res.status(201).json(posts);
+    res.status(201).json(newPost);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
