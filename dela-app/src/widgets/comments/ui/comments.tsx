@@ -1,4 +1,4 @@
-import { Comment } from '@src/entities/comment/ui/comment';
+import { Comment } from '@src/entities/comment';
 import { IPost } from '@src/shared/interfaces/entities/Post.interface';
 
 export const Comments = ({ comments }: Pick<IPost, 'comments'>) => {

@@ -9,7 +9,7 @@ import { Friends } from '@src/widgets/friends';
 import { IconMapPin } from '@tabler/icons-react';
 import { useUnit } from 'effector-react';
 
-import { userQuery } from '../api/query';
+import { userQuery } from '../model';
 import cs from './user.module.scss';
 
 export const User = () => {

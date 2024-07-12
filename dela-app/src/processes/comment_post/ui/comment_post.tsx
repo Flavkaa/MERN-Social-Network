@@ -7,7 +7,7 @@ import { Avatar } from '@src/widgets/avatar/avatar';
 import { IconSend2 } from '@tabler/icons-react';
 import { useUnit } from 'effector-react';
 
-import { sendComment } from '../model/model';
+import { sendComment } from '../model';
 import cs from './comment.module.scss';
 
 export const CommentPost = ({ id, value, set }: { id: number; value: string; set: (value: string) => void }) => {

@@ -1,4 +1,4 @@
-import { userQuery } from '@src/entities/user/api/query';
+import { userQuery } from '@src/entities/user/model';
 
 import { chainRoute, redirect, RouteInstance, RouteParams, RouteParamsAndQuery } from 'atomic-router';
 import { createEvent, sample } from 'effector';

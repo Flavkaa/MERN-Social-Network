@@ -8,7 +8,7 @@ import { IconHeart, IconHeartFilled, IconHearts } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useUnit } from 'effector-react';
 
-import { clickLike, ILike } from '../model/model';
+import { clickLike, ILike } from '../model';
 import cs from './actions_post.module.scss';
 import { AddFriend } from '@src/processes/add_friend';
 

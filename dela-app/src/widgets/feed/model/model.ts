@@ -1,7 +1,7 @@
 import { routes } from '@src/app/routes';
 import { toLikeOrDislikePost } from '@src/processes/actions_post';
-import { commentPost } from '@src/processes/comment_post/model/model';
-import { createPost } from '@src/processes/create_post/model/model';
+import { commentPost } from '@src/processes/comment_post/model';
+import { createPost } from '@src/processes/create_post/model';
 import { api } from '@src/shared/api';
 import { replaceItem } from '@src/shared/helpers/replaceArrayItem';
 import { IPost } from '@src/shared/interfaces/entities/Post.interface';

@@ -1,4 +1,4 @@
-import { Post } from '@src/entities/post/ui/post';
+import { Post } from '@src/entities/post';
 
 import { useUnit } from 'effector-react';
 

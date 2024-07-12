@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userQuery } from '@src/entities/user/api/query';
+import { userQuery } from '@src/entities/user/model';
 import { useKeyDown } from '@src/shared/hooks/useKeyDown';
 import { Container } from '@src/shared/ui/container';
 import { Input } from '@src/shared/ui/input';
@@ -9,7 +9,7 @@ import { Avatar } from '@src/widgets/avatar/avatar';
 import { IconSend2 } from '@tabler/icons-react';
 import { useUnit } from 'effector-react';
 
-import { sendPost } from '../model/model';
+import { sendPost } from '../model';
 import cs from './create_post.module.scss';
 
 export const CreatePost = () => {

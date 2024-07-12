@@ -4,7 +4,7 @@ import { userQuery } from '@src/entities/user/api/query';
 import { IconFriends, IconFriendsOff } from '@tabler/icons-react';
 import { useUnit } from 'effector-react';
 
-import { clickFriend } from '../model/model';
+import { clickFriend } from '../model';
 
 type Props = {
   inFriends: boolean;
