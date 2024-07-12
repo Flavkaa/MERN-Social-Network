@@ -6,7 +6,6 @@ import { createQuery } from '@farfetched/core';
 export const userQuery = createQuery({
   handler: async () => {
     const response = await api.get<IUser>('/user');
-
     return response.data;
   },
 });

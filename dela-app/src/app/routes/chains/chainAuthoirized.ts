@@ -2,7 +2,7 @@ import { userQuery } from '@src/entities/user/api/query';
 
 import { chainRoute, redirect, RouteInstance, RouteParams, RouteParamsAndQuery } from 'atomic-router';
 import { createEvent, sample } from 'effector';
-import { not, or } from 'patronum';
+import { not } from 'patronum';
 
 import { $isAuth } from '../../model';
 import { routes } from '../router';

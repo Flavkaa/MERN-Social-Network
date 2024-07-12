@@ -35,7 +35,7 @@ export const CreatePost = () => {
         icon={<IconSend2 />}
         id={'post-input'}
         onChange={handleChange}
-        onIconClick={() => {}}
+        onIconClick={handleSend}
         placeholder="Как прошёл ваш день?"
         value={value}
       />
