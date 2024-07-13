@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { userQuery } from '@src/entities/user/api/query';
+import { userQuery } from '@src/entities/user/model';
 
 import { IconFriends, IconFriendsOff } from '@tabler/icons-react';
 import { useUnit } from 'effector-react';

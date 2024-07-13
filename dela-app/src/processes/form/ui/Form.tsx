@@ -21,7 +21,7 @@ import {
   formSubmitted,
   lastNameChanged,
   passwordChanged,
-} from '../model/model';
+} from '../model';
 import cs from './Form.module.scss';
 import { LoginMode } from './LoginMode';
 import { RegistrationMode } from './RegistrationMode';

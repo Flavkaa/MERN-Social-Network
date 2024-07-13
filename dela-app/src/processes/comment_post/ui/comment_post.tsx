@@ -1,4 +1,4 @@
-import { userQuery } from '@src/entities/user/api/query';
+import { userQuery } from '@src/entities/user/model';
 import { Container } from '@src/shared/ui/container';
 import { Borders } from '@src/shared/ui/container/container';
 import { Input } from '@src/shared/ui/input';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { User } from '@src/entities/user/ui';
+import { User } from '@src/entities/user';
 import { CreatePost } from '@src/processes/create_post';
 import { Direction } from '@src/shared/interfaces/ui/Flex.interfaces';
 import { FeedLayout } from '@src/shared/layouts/feed_layout';

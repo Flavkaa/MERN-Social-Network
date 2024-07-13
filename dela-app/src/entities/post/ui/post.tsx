@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { routes } from '@src/app/routes';
-import { userQuery } from '@src/entities/user/api/query';
+import { userQuery } from '@src/entities/user/model';
 import { ActionsPost } from '@src/processes/actions_post';
 import { CommentPost } from '@src/processes/comment_post';
 import { formatDateTime } from '@src/shared/helpers/formatDate';

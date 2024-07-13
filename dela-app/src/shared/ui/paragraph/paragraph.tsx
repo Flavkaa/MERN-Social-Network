@@ -6,17 +6,13 @@ import cs from './paragraph.module.scss';
 
 export type SizeVariant = 'l' | 'xl' | 's' | 'm';
 
-export interface TitleProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLParagraphElement>,
-    HTMLParagraphElement
-  > {
+export type ParagraphProps = React.ComponentProps<'p'> & {
   title?: string;
   className?: string;
   size?: SizeVariant;
   tag?: React.ElementType;
   isLoading?: boolean;
-}
+};
 
 export const Paragraph = ({
   title,
@@ -26,17 +22,9 @@ export const Paragraph = ({
   isLoading,
   tag: Tag = 'p',
   ...props
-}: TitleProps) => {
+}: ParagraphProps) => {
   return (
-    <Tag
-      className={cn(
-        cs.title,
-        className,
-        size && cs[size as SizeVariant],
-        isLoading && cs.isLoading,
-      )}
-      {...props}
-    >
+    <Tag className={cn(cs.title, className, size && cs[size as SizeVariant], isLoading && cs.isLoading)} {...props}>
       {title || children}
     </Tag>
   );

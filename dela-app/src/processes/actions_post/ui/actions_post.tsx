@@ -1,8 +1,10 @@
-import { Align, Justify } from '@src/shared/interfaces/ui/Flex.interfaces';
+import { AddFriend } from '@src/processes/add_friend';
+import { Align } from '@src/shared/interfaces/ui/Flex.interfaces';
 import { Container } from '@src/shared/ui/container';
 import { Borders } from '@src/shared/ui/container/container';
 import { Flex } from '@src/shared/ui/flex';
 import { Paragraph } from '@src/shared/ui/paragraph/paragraph';
+import { Tooltip } from '@src/shared/ui/tooltip/tooltip';
 
 import { IconHeart, IconHeartFilled, IconHearts } from '@tabler/icons-react';
 import classNames from 'classnames';
@@ -10,7 +12,6 @@ import { useUnit } from 'effector-react';
 
 import { clickLike, ILike } from '../model';
 import cs from './actions_post.module.scss';
-import { AddFriend } from '@src/processes/add_friend';
 
 export const ActionsPost = ({
   isLiked,
@@ -31,17 +32,19 @@ export const ActionsPost = ({
     <Container borders={Borders.NoRadius}>
       <Flex align={Align.Center}>
         {userId && <AddFriend id={userId} inFriends={inFriends} />}
-        {isLiked ? (
-          <IconHeartFilled
-            className={isLiked ? classNames(cs.like_button, cs.liked) : undefined}
-            onClick={() => click(data)}
-          />
-        ) : (
-          <IconHeart
-            className={isLiked ? undefined : classNames(cs.like_button, cs.unliked)}
-            onClick={() => click(data)}
-          />
-        )}
+        <Tooltip text={isLiked ? 'Не нравится' : 'Нравится'} type="down">
+          {isLiked ? (
+            <IconHeartFilled
+              className={isLiked ? classNames(cs.like_button, cs.liked) : undefined}
+              onClick={() => click(data)}
+            />
+          ) : (
+            <IconHeart
+              className={isLiked ? undefined : classNames(cs.like_button, cs.unliked)}
+              onClick={() => click(data)}
+            />
+          )}
+        </Tooltip>
         {amount > 0 && (
           <Flex>
             <Paragraph>{amount}</Paragraph>
